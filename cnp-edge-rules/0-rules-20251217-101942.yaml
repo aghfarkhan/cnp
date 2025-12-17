@@ -1,0 +1,189 @@
+- apiVersion: cilium.io/v2
+  kind: CiliumNetworkPolicy
+  metadata:
+    namespace: sample-rules-for-asa
+    uid: bf6b0268-9200-4a78-b38b-c88b1719d46d
+    name: sample-rules-for-asa-to-physical-env-manoj
+  spec:
+    endpointSelector: {}
+    egress:
+      - toFQDNs:
+          - matchPattern: '*.my.domain.us.gov'
+          - matchName: sftp.quick-ms.com
+          - matchName: xn--ruqumz1h0h.com
+          - matchPattern: '*.dropbox.com'
+          - matchPattern: '*.aadrm.com'
+          - matchPattern: '*.quicksuper.caresuper.com.au'
+          - matchName: ahmar.web.com
+          - matchName: mem.gfx.ms
+          - matchName: azureedge.net
+          - matchName: esolvers.com
+    egressDeny: []
+    ingress:
+      - {}
+    ingressDeny: []
+  objectId: bf6b0268-9200-4a78-b38b-c88b1719d46d
+- apiVersion: cilium.io/v2
+  kind: CiliumNetworkPolicy
+  metadata:
+    namespace: sample-rules-for-asa
+    uid: 736eae53-ab61-4ae6-b6d1-0fa3d295a92a
+    name: sample-rules-for-asa-any-vm-to-sg-with-external-subnets
+  spec:
+    endpointSelector:
+      matchLabels:
+        nsx-group: net-10-26-185-0-24
+    egress:
+      - toCIDR:
+          - 10.26.185.0/24
+    egressDeny: []
+    ingress:
+      - fromCIDR:
+          - 10.26.185.0/24
+          - 10.0.0.1/32
+    ingressDeny: []
+  objectId: 736eae53-ab61-4ae6-b6d1-0fa3d295a92a
+- apiVersion: cilium.io/v2
+  kind: CiliumNetworkPolicy
+  metadata:
+    namespace: sample-rules-for-asa
+    uid: 0efcb80c-c10a-4cdd-b3ee-0d1446ace602
+    name: sample-rules-for-asa-these-are-vms
+  spec:
+    endpointSelector:
+      matchLabels:
+        scope1: tag1
+    egress:
+      - toPorts:
+          - ports:
+              - portValue: 443
+                protocol: TCP
+              - portValue: 22
+                protocol: TCP
+        toCIDR:
+          - 10.100.200.10/32
+          - 192.188.1.4/32
+          - 172.16.100.0/24
+    egressDeny: []
+    ingress:
+      - fromCIDR:
+          - 172.16.100.0/24
+    ingressDeny: []
+  objectId: 0efcb80c-c10a-4cdd-b3ee-0d1446ace602
+- apiVersion: cilium.io/v2
+  kind: CiliumNetworkPolicy
+  metadata:
+    namespace: sample-rules-for-asa
+    uid: 4bdc25b1-efae-4e64-9b9b-de254f8d3c4a
+    name: sample-rules-for-asa-vm-to-vm
+  spec:
+    endpointSelector:
+      matchLabels:
+        nsx-group: vms-in-group
+    egress:
+      - toPorts:
+          - ports:
+              - portValue: 9101
+                protocol: TCP
+              - portValue: 1522
+                protocol: TCP
+              - portValue: 24200
+                protocol: TCP
+              - portValue: 5414
+                protocol: TCP
+        toCIDR:
+          - 10.100.200.10/32
+          - 192.188.1.4/32
+    egressDeny: []
+    ingress:
+      - {}
+    ingressDeny: []
+  objectId: 4bdc25b1-efae-4e64-9b9b-de254f8d3c4a
+- apiVersion: cilium.io/v2
+  kind: CiliumNetworkPolicy
+  metadata:
+    namespace: sample-rules-for-asa
+    uid: 1d42c037-4f3f-4124-961a-f418deaf25d3
+    name: sample-rules-for-asa-external-to-vm-ip
+  spec:
+    endpointSelector: {}
+    egress:
+      - toPorts:
+          - ports:
+              - portValue: ''
+                protocol: ICMPV6
+        toCIDR:
+          - 10.100.201.10/32
+          - 10.45.2.200/32
+    egressDeny: []
+    ingress:
+      - toPorts:
+          - ports:
+              - portValue: ''
+                protocol: ICMPV6
+    ingressDeny: []
+  objectId: 1d42c037-4f3f-4124-961a-f418deaf25d3
+- apiVersion: cilium.io/v2
+  kind: CiliumNetworkPolicy
+  metadata:
+    namespace: sample-rules-for-asa
+    uid: 9bc9cf63-3944-439f-8f52-c2356359b7d9
+    name: sample-rules-for-asa-external-to-vm-subnets
+  spec:
+    endpointSelector: {}
+    egress:
+      - toPorts:
+          - ports:
+              - portValue: 22
+                protocol: TCP
+        toCIDR:
+          - 10.100.201.0/24
+    egressDeny: []
+    ingress:
+      - {}
+    ingressDeny: []
+  objectId: 9bc9cf63-3944-439f-8f52-c2356359b7d9
+- action: Deny
+  apiVersion: cilium.io/v2
+  kind: CiliumNetworkPolicy
+  metadata:
+    namespace: sample-rules-for-asa
+    uid: d7c30f24-450d-48d8-b838-cdc033b46209
+    name: sample-rules-for-asa-external-to-vms
+  spec:
+    endpointSelector: {}
+    egress: []
+    egressDeny:
+      - toCIDR:
+          - 10.100.200.10/32
+          - 192.188.1.4/32
+    ingress: []
+    ingressDeny:
+      - {}
+  objectId: d7c30f24-450d-48d8-b838-cdc033b46209
+- action: Deny
+  apiVersion: cilium.io/v2
+  kind: CiliumNetworkPolicy
+  metadata:
+    namespace: sample-rules-for-asa
+    uid: 46a89b15-0479-48db-99d9-07d51d8ed28b
+    name: sample-rules-for-asa-dest-will-be-ip-list-not-virtual
+  spec:
+    endpointSelector:
+      matchLabels:
+        nsx-group: group-with-a-tag
+    egress: []
+    egressDeny:
+      - toPorts:
+          - ports:
+              - portValue: 443
+                protocol: TCP
+        toCIDR:
+          - 1.1.1.0/24
+          - 2.2.2.0/24
+          - 192.168.0.0/16
+          - 10.0.0.0/8
+    ingress: []
+    ingressDeny:
+      - {}
+  objectId: 46a89b15-0479-48db-99d9-07d51d8ed28b
