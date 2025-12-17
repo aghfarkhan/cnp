@@ -1,0 +1,163 @@
+- log: true
+  apiVersion: cilium.io/v2
+  kind: CiliumNetworkPolicy
+  metadata:
+    name: To-physical-env-manoj
+  spec:
+    endpointSelector: {}
+    egress:
+      - toFQDNs:
+          - matchPattern: '*.my.domain.us.gov'
+          - matchName: sftp.quick-ms.com
+          - matchName: xn--ruqumz1h0h.com
+          - matchPattern: '*.dropbox.com'
+          - matchPattern: '*.aadrm.com'
+          - matchPattern: '*.quicksuper.caresuper.com.au'
+          - matchName: ahmar.web.com
+          - matchName: mem.gfx.ms
+          - matchName: azureedge.net
+          - matchName: esolvers.com
+        toPorts:
+          - ports: []
+  objectId: To-physical-env-manoj
+  name: To-physical-env-manoj
+- log: true
+  apiVersion: cilium.io/v2
+  kind: CiliumNetworkPolicy
+  metadata:
+    name: Any-VM-to-SG-with-external-subnets
+  spec:
+    endpointSelector:
+      matchLabels:
+        Net_10.26.185.0_24: Net_10.26.185.0_24
+    egress:
+      - toPorts:
+          - ports: []
+        toCIDR:
+          - 10.26.185.0/24
+  objectId: Any-VM-to-SG-with-external-subnets
+  name: Any-VM-to-SG-with-external-subnets
+- log: true
+  apiVersion: cilium.io/v2
+  kind: CiliumNetworkPolicy
+  metadata:
+    name: These-are-VMs
+  spec:
+    endpointSelector:
+      matchLabels:
+        tag1: tag1
+    egress:
+      - toPorts:
+          - ports:
+              - portValue: 443
+                protocol: TCP
+              - portValue: 22
+                protocol: tcp
+        toCIDR:
+          - 10.100.200.10
+          - 192.188.1.4
+          - 172.16.100.0/24
+  objectId: These-are-VMs
+  name: These-are-VMs
+- log: true
+  apiVersion: cilium.io/v2
+  kind: CiliumNetworkPolicy
+  metadata:
+    name: VM to VM
+  spec:
+    endpointSelector:
+      matchLabels:
+        Tag 1011: Tag 1011
+    egress:
+      - toPorts:
+          - ports:
+              - portValue: 9101
+                protocol: TCP
+              - portValue: 1522
+                protocol: tcp
+              - portValue: 24200
+                protocol: tcp
+              - portValue: 5414
+                protocol: tcp
+        toCIDR:
+          - 10.100.200.10
+          - 192.188.1.4
+  objectId: VMtoVM
+  name: VM to VM
+- log: true
+  apiVersion: cilium.io/v2
+  kind: CiliumNetworkPolicy
+  metadata:
+    name: External to VM IP
+  spec:
+    endpointSelector:
+      matchLabels:
+        VM IPp: VM IPp
+    egress:
+      - toPorts:
+          - ports:
+              - portValue: 21
+                protocol: TCP
+        toCIDR:
+          - 10.100.201.10
+          - 10.45.2.200
+  objectId: ExternaltoVMIP
+  name: External to VM IP
+- log: true
+  apiVersion: cilium.io/v2
+  kind: CiliumNetworkPolicy
+  metadata:
+    name: External to VM Subnets
+  spec:
+    endpointSelector:
+      matchLabels:
+        VM Subnet Group: VM Subnet Group
+    egress:
+      - toPorts:
+          - ports:
+              - portValue: 22
+                protocol: TCP
+        toCIDR:
+          - 10.100.201.0/24
+  objectId: ExternaltoVMSubnets
+  name: External to VM Subnets
+- action: Deny
+  log: true
+  apiVersion: cilium.io/v2
+  kind: CiliumNetworkPolicy
+  metadata:
+    name: External to VMs
+  spec:
+    endpointSelector:
+      matchLabels:
+        Tag 1011: Tag 1011
+    egressDeny:
+      - toPorts:
+          - ports: []
+        toCIDR:
+          - 10.100.200.10
+          - 192.188.1.4
+  objectId: ExternaltoVMs
+  name: External to VMs
+- action: Deny
+  log: true
+  apiVersion: cilium.io/v2
+  kind: CiliumNetworkPolicy
+  metadata:
+    name: Dest will be IP List - not virtual
+  spec:
+    endpointSelector:
+      matchLabels:
+        LOCAL-NETS: LOCAL-NETS
+    egressDeny:
+      - toPorts:
+          - ports:
+              - portValue: 443
+                protocol: TCP
+        toCIDR:
+          - 1.1.1.0/24
+          - 2.2.2.0/24
+          - 192.168.0.0/16
+          - 10.0.0.0/8
+  objectId: DestwillbeIPList-notvirtual
+  name: Dest will be IP List - not virtual

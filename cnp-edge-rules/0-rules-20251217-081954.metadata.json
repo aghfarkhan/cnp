@@ -1,0 +1,17 @@
+{
+  "Repository": {
+    "Id": "7537698c-c92a-4c30-b629-d86921858525",
+    "Name": "CNP Git",
+    "Url": "https://github.com/aghfarkhan/cnp.git",
+    "Branch": "main",
+    "RuleType": "0",
+    "Environment": "Stg"
+  },
+  "Publishing": {
+    "Timestamp": "2025-12-17T08:19:54.7817307Z",
+    "Format": "Yaml",
+    "Version": "1.0",
+    "ContentType": "List\u00601"
+  },
+  "Options": {}
+}
