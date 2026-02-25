@@ -1,0 +1,68 @@
+- action: Deny
+  apiVersion: cilium.io/v2
+  kind: CiliumClusterwideNetworkPolicy
+  spec:
+    endpointSelector: {}
+    egress: []
+    egressDeny:
+      - {}
+    ingress: []
+    ingressDeny: []
+  objectId: 7d3158be-2ea5-49c7-8290-036f73bfca32
+  metadata:
+    uid: 7d3158be-2ea5-49c7-8290-036f73bfca32
+    name: ahmarsection-rulewithsourcedomain
+- action: Deny
+  apiVersion: cilium.io/v2
+  kind: CiliumClusterwideNetworkPolicy
+  spec:
+    endpointSelector: {}
+    egress: []
+    egressDeny:
+      - toPorts:
+          - ports:
+              - portValue: ''
+                protocol: ICMP
+    ingress: []
+    ingressDeny:
+      - toPorts:
+          - ports:
+              - portValue: ''
+                protocol: ICMP
+  objectId: c6483219-6d39-43c4-b85e-ec8279d57bd8
+  metadata:
+    uid: c6483219-6d39-43c4-b85e-ec8279d57bd8
+    name: ahmarsection-rulewithdestdomain
+- action: Deny
+  apiVersion: cilium.io/v2
+  kind: CiliumClusterwideNetworkPolicy
+  spec:
+    endpointSelector: {}
+    egress: []
+    egressDeny:
+      - {}
+    ingress: []
+    ingressDeny: []
+  objectId: 99f49919-c0bf-42b6-b72b-d952fa322f78
+  metadata:
+    uid: 99f49919-c0bf-42b6-b72b-d952fa322f78
+    name: ahmarsection-rulewithmultipledomains
+- action: Deny
+  apiVersion: cilium.io/v2
+  kind: CiliumClusterwideNetworkPolicy
+  spec:
+    endpointSelector: {}
+    egress: []
+    egressDeny:
+      - toPorts:
+          - ports:
+              - portValue: 25
+                protocol: TCP
+              - portValue: 5190
+                protocol: TCP
+    ingress: []
+    ingressDeny: []
+  objectId: c6efe09c-98ca-41d2-8b3e-d1d3ca5543b9
+  metadata:
+    uid: c6efe09c-98ca-41d2-8b3e-d1d3ca5543b9
+    name: ahmarsection-rule-1
