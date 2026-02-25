@@ -1,0 +1,19 @@
+- log: true
+  apiVersion: cilium.io/v2
+  kind: CiliumClusterwideNetworkPolicy
+  spec:
+    endpointSelector: {}
+    egress:
+      - {}
+    egressDeny: []
+    ingress:
+      - fromEndpoints:
+          - matchLabels:
+              nsx-group: 7-9-8-8
+        fromCIDR:
+          - 3.4.5.9/32
+    ingressDeny: []
+  objectId: 9a07d43a-5881-4292-ba94-662cfeb4242e
+  metadata:
+    uid: 9a07d43a-5881-4292-ba94-662cfeb4242e
+    name: ahmar-section-1
