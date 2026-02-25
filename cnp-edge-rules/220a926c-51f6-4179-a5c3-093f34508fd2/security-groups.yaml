@@ -1,0 +1,16 @@
+- apiVersion: fabrix.io/v1alpha1
+  kind: FabrixSystemSecurityGroup
+  spec:
+    displayName: 7-9-8-8
+    endpointIPs:
+      - 3.4.5.9/32
+    origin:
+      system: NSX
+      originatedId: 7.9.8.8
+    type: IP
+  objectId: 7-9-8-8
+  name: 7-9-8-8
+  metadata:
+    namespace: fabrix-system
+    uid: 7e567419-6250-436b-93b8-f7a562668984
+    name: 7-9-8-8
