@@ -1,0 +1,20 @@
+apiVersion: cilium.io/v2
+kind: CiliumClusterwideNetworkPolicy
+metadata:
+  name: ahmar-section-1
+  namespace: fabrix-system
+  labels:
+    fabrix.io/managed: true
+    fabrix.io/datasource-id: a80f961d-42fa-440f-82a7-25fd390fb1ec
+spec:
+  endpointSelector: {}
+  egress:
+  - {}
+  egressDeny: []
+  ingress:
+  - fromEndpoints:
+    - matchLabels:
+        nsx-group: 7-9-8-8
+    fromCIDR:
+    - 3.4.5.9/32
+  ingressDeny: []
